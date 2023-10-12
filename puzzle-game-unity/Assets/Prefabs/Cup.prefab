@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6342896704234919236}
   - component: {fileID: 7681245847968105968}
   m_Layer: 0
-  m_Name: StartTube
+  m_Name: Cup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
