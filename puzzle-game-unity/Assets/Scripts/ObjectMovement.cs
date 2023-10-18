@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragObject : MonoBehaviour
+public class ObjectMovement : MonoBehaviour
 {
     private Vector3 mOffset;
     private float mZCoord;
@@ -30,6 +30,4 @@ public class DragObject : MonoBehaviour
     {
         transform.position = GetMouseWorldPos() + mOffset;
     }
-
-
 }
