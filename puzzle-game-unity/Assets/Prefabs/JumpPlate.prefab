@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6404981320698864785}
   - component: {fileID: 1516205122936415993}
   - component: {fileID: -5513684572367847135}
+  - component: {fileID: 4167053877989734123}
   m_Layer: 0
   m_Name: JumpPlate
   m_TagString: JumpPlate
@@ -102,7 +103,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
@@ -132,7 +133,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 6
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!122 &-5513684572367847135
 Halo:
@@ -141,8 +142,24 @@ Halo:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8283130174189751240}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Color:
     serializedVersion: 2
     rgba: 4291294717
   m_Size: 3
+--- !u!114 &4167053877989734123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283130174189751240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c1bbca33496426a8ec205663f11b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xBound: 0
+  yBound: 0
+  width: 0
+  height: 0

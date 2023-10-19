@@ -4,18 +4,86 @@ using UnityEngine;
 
 public class ObjectMovement : MonoBehaviour
 {
+    public float xBound, yBound, width, height;
     private Vector3 mOffset;
     private Vector3 mPosition;
     private float mZCoord;
+    private bool _isSelected = false;
+    void Update()
+    {
+        if (_isSelected)
+        {
+            Vector3 mousePos2D = Input.mousePosition;
+
+            // instructs how far to push mouse into 3D
+            mousePos2D.z = -Camera.main.transform.position.z;
+
+            // convert point from 2D screen to 3D world
+            Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(mousePos2D);
+
+            Vector3 pos = mousePos3D;
+            pos.x = mousePos3D.x;
+            this.transform.position = pos;
+            if (Input.GetMouseButtonUp(0))
+            {
+                _isSelected = false;
+            }
+        }
+        else
+        {
+            return;
+        }
+        
+    }
     void OnMouseDown()
     {
-
-        mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+        //Debug.Log("Mouse down");
+        //mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
 
         // store offset = gameobject world pos - mouse world pos
-        mOffset = gameObject.transform.position - GetMouseWorldPos();
+        //mOffset = gameObject.transform.position - GetMouseWorldPos();
+        if(!_isSelected)
+        {
+            Debug.Log("Selected: " + this.name);
+            _isSelected = true;
+        } else
+        {
+            Debug.Log("Un-selected: " + this.name);
+            _isSelected = false;
+        }
     }
-
+    void OnMouseEnter()
+    {
+        //Debug.Log("Mouse enters");
+    }
+    void OnMouseDrag()
+    {
+        
+        //Debug.Log("Mouse drags");
+        //mPosition = GetMouseWorldPos();
+        //if (InBounds(mPosition))
+        //{
+            //transform.position = GetMouseWorldPos() + mOffset;
+        //}
+        
+    }
+    void OnMouseExit()
+    {
+        //Debug.Log("Mouse exits");    
+    }
+    void OnMouseOver()
+    {
+        //Debug.Log("Mouse over");
+        
+    }
+    void OnMouseUp()
+    {
+        
+    }
+    void OnMouseUpAsButton()
+    {
+        
+    }
     private Vector3 GetMouseWorldPos()
     {
         // pixel coordinates (x,y)
@@ -26,19 +94,9 @@ public class ObjectMovement : MonoBehaviour
 
         return Camera.main.ScreenToWorldPoint(mousePoint);
     }
-
-    void OnMouseDrag()
+    private bool InBounds(Vector3 mousePos)
     {
-        mPosition = GetMouseWorldPos();
-        if (InBounds(mPosition))
-        {
-            transform.position = GetMouseWorldPos() + mOffset;
-        }
-        
-    }
-    bool InBounds(Vector3 mousePos)
-    {
-        Rect borders = new Rect(-30,2,50,75);
+        Rect borders = new Rect(xBound, yBound, width, height);
         if (borders.Contains(mPosition))
         {
             return true;
