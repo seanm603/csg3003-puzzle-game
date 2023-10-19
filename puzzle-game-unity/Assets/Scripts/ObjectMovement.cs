@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectMovement : MonoBehaviour
 {
     private Vector3 mOffset;
+    private Vector3 mPosition;
     private float mZCoord;
     void OnMouseDown()
     {
@@ -28,6 +29,22 @@ public class ObjectMovement : MonoBehaviour
 
     void OnMouseDrag()
     {
-        transform.position = GetMouseWorldPos() + mOffset;
+        mPosition = GetMouseWorldPos();
+        if (InBounds(mPosition))
+        {
+            transform.position = GetMouseWorldPos() + mOffset;
+        }
+        
+    }
+    bool InBounds(Vector3 mousePos)
+    {
+        Rect borders = new Rect(-30,2,50,75);
+        if (borders.Contains(mPosition))
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 }

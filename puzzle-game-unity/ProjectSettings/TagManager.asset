@@ -8,6 +8,7 @@ TagManager:
   - JumpPlate
   - Cup
   - Ball
+  - WinSensor
   layers:
   - Default
   - TransparentFX

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &45149463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 45149465}
+  - component: {fileID: 45149464}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &45149464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45149463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2441651a4fff749ba6f5136bb41f74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneLoadingManager: {fileID: 228263136}
+  _isGameOver: 0
+--- !u!4 &45149465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45149463}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &138929997
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +303,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 138929997}
   m_CullTransparentMesh: 1
+--- !u!1 &228263135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 228263137}
+  - component: {fileID: 228263136}
+  m_Layer: 0
+  m_Name: SceneLoadingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &228263136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228263135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b85de3ca4e6ec543966d474fe3b9350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeScene: 0
+--- !u!4 &228263137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228263135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 841.01575, y: 529.23267, z: 5.222475}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &592097671
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,9 +554,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 592097675}
     m_Modifications:
+    - target: {fileID: 3952717779697522446, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 45149464}
+    - target: {fileID: 3952717779697522446, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952717779697522446, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4073016048243375056, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
       propertyPath: m_Name
-      value: QuitButton
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 6037498109618654942, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
       propertyPath: m_text
@@ -640,14 +743,22 @@ PrefabInstance:
     - target: {fileID: 3952717779697522446, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: 4d009b4e63ec34ee7b4dd434337cc4c8, type: 3}
+      objectReference: {fileID: 45149464}
+    - target: {fileID: 3952717779697522446, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952717779697522446, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4073016048243375056, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
       propertyPath: m_Name
-      value: StartButton
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 6037498109618654942, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
       propertyPath: m_text
-      value: Try Again
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 7089666640596413728, guid: 3e779037b1c4c479f8a9f8844a6111af, type: 3}
       propertyPath: m_Pivot.x
@@ -839,3 +950,5 @@ SceneRoots:
   - {fileID: 1238789699}
   - {fileID: 1701508227}
   - {fileID: 592097675}
+  - {fileID: 228263137}
+  - {fileID: 45149465}

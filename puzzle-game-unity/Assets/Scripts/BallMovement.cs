@@ -15,35 +15,35 @@ public class BallMovement : MonoBehaviour
     {
         if (canMove)
         {
-            float hAxis = Input.GetAxis("Horizontal");
-            Vector3 pos = transform.position;
-            if (pos.x < leftBound)
-            {
-                pos.x = leftBound;
-            }
-            if (pos.x > rightBound)
-            {
-                pos.x = rightBound;
-            }
-            pos.x += hAxis * speed * Time.deltaTime;
-            transform.position = pos;
+            MoveBall();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                canMove = false;
-                Rigidbody rb = GetComponent<Rigidbody>();
-                rb.useGravity = true;
-                rb.isKinematic = false;
+                DropBall();
             }
         }
-        else // ball has been launched
+
+    }
+    void MoveBall()
+    {
+        float hAxis = Input.GetAxis("Horizontal");
+        Vector3 pos = transform.position;
+        if (pos.x < leftBound)
         {
-            // ball has stopped moving
-            CheckBounds();
-            if (GetComponent<Rigidbody>().velocity.magnitude < 0.5)
-            {
-                Debug.Log("Ball stopped at: " + transform.position);
-            }
+            pos.x = leftBound;
         }
+        if (pos.x > rightBound)
+        {
+            pos.x = rightBound;
+        }
+        pos.x += hAxis * speed * Time.deltaTime;
+        transform.position = pos;
+    }
+    void DropBall()
+    {
+        canMove = false;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.isKinematic = false;
     }
     void OnCollisionEnter(Collision coll)
     {
@@ -62,6 +62,10 @@ public class BallMovement : MonoBehaviour
                 break;
             case "Cup":
                 Debug.Log("Hit the cup!");
+                break;
+            case "WinSensor":
+                Debug.Log("You win!");
+                SceneManager.LoadScene("LevelPassed");
                 break;
             default:
                 break;
