@@ -16,13 +16,13 @@ public class ObjectMovement : MonoBehaviour
             Vector3 mousePos2D = Input.mousePosition;
 
             // instructs how far to push mouse into 3D
-            mousePos2D.z = -Camera.main.transform.position.z;
+            //mousePos2D.z = -Camera.main.transform.position.z;
 
             // convert point from 2D screen to 3D world
             Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(mousePos2D);
 
             Vector3 pos = mousePos3D;
-            pos.x = mousePos3D.x;
+            //pos.x = mousePos3D.x;
             this.transform.position = pos;
             if (Input.GetMouseButtonUp(0))
             {
