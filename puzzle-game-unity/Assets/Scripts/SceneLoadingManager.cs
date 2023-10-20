@@ -6,40 +6,29 @@ using UnityEngine.SceneManagement;
 public class SceneLoadingManager : MonoBehaviour
 {
     [HideInInspector] public int activeScene;
-    public GameObject ballPrefab;
-    public GameObject cupPrefab;
-    public GameObject prismPrefab;
-    public GameObject jumpPlatePrefab;
+    public GameObject headPrefab, snowmanPrefab, jumpPlatePrefab, groundPrefab;
     void Awake()
     {
-        ReturnActiveScene();    
-    }
-    void Start()
-    {
-        InstantiateGOs();
-    }
-    private void InstantiateGOs()
-    {
-        if (ballPrefab != null)
+        ReturnActiveScene();
+        if (groundPrefab != null)
         {
-            GameObject ball = Instantiate<GameObject>(ballPrefab);
+            GameObject ground = Instantiate<GameObject>(groundPrefab);
         }
-        if (cupPrefab != null)
+        if (headPrefab != null)
         {
-            GameObject cup = Instantiate<GameObject>(cupPrefab);
-        }
-        if (prismPrefab != null)
-        {
-            GameObject triPrism = Instantiate<GameObject>(prismPrefab);
+            GameObject head = Instantiate<GameObject>(headPrefab);
         }
         if (jumpPlatePrefab != null)
         {
             GameObject jumpPlate = Instantiate<GameObject>(jumpPlatePrefab);
         }
-        else
+        if (snowmanPrefab != null)
         {
-            Debug.Log("jump plate fucked?");
+            GameObject snowman = Instantiate<GameObject>(snowmanPrefab);
         }
+    }
+    void Start()
+    {
     }
     public int LoadGame(int sceneIndex)
     {

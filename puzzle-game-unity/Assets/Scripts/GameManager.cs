@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneLoadingManager _sceneLoadingManager;
     [SerializeField] private bool _isGameOver;
     [SerializeField] private bool _isReloading;
+    private GameObject _head;
+    private GameObject _snowman;
+    private GameObject _ground;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +28,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            GoToScene("TitleScene");
         }
     }
 
@@ -43,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Debug.LogWarning("Restart Logic Not Implemented");
-        
+
         if (_isGameOver)
         {
             int sceneID = _sceneLoadingManager.activeScene;
@@ -53,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("You can not restart now...");
         }
-    } 
+    }
     public void GoToScene(string sceneName)
     {
         _sceneLoadingManager.LoadGame(sceneName);

@@ -9,6 +9,9 @@ TagManager:
   - Cup
   - Ball
   - WinSensor
+  - Snowman
+  - Hat
+  - Head
   layers:
   - Default
   - TransparentFX

@@ -1,108 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ObjectMovement : MonoBehaviour
 {
-    public float xBound, yBound, width, height;
+    public float xBound, upBound, lowBound, moveSpeed;
     private Vector3 mOffset;
     private Vector3 mPosition;
     private float mZCoord;
-    private bool _isSelected = false;
+    private SceneLoadingManager _sceneLoadingManager;
+    private GameManager _gameManager;
+
+    void Start()
+    {
+        _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     void Update()
     {
-        if (_isSelected)
+        MoveObject();
+    }
+    void MoveObject()
+    {
+        float hAxis = Input.GetAxis("Horizontal");
+        float vAxis = Input.GetAxis("Vertical");
+        float rTilt = Input.GetAxis("Mouse X");
+        // float lTilt = Input.GetAxis("Mouse Y");
+        Vector3 pos = transform.position;
+        if (pos.x < -xBound)
         {
-            Vector3 mousePos2D = Input.mousePosition;
-
-            // instructs how far to push mouse into 3D
-            //mousePos2D.z = -Camera.main.transform.position.z;
-
-            // convert point from 2D screen to 3D world
-            Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(mousePos2D);
-
-            Vector3 pos = mousePos3D;
-            //pos.x = mousePos3D.x;
-            this.transform.position = pos;
-            if (Input.GetMouseButtonUp(0))
-            {
-                _isSelected = false;
-            }
+            pos.x = -xBound;
         }
-        else
+        if (pos.x > xBound)
         {
-            return;
+            pos.x = xBound;
         }
-        
-    }
-    void OnMouseDown()
-    {
-        //Debug.Log("Mouse down");
-        //mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-
-        // store offset = gameobject world pos - mouse world pos
-        //mOffset = gameObject.transform.position - GetMouseWorldPos();
-        if(!_isSelected)
+        if (pos.y < lowBound)
         {
-            Debug.Log("Selected: " + this.name);
-            _isSelected = true;
-        } else
-        {
-            Debug.Log("Un-selected: " + this.name);
-            _isSelected = false;
+            pos.y = lowBound;
         }
-    }
-    void OnMouseEnter()
-    {
-        //Debug.Log("Mouse enters");
-    }
-    void OnMouseDrag()
-    {
-        
-        //Debug.Log("Mouse drags");
-        //mPosition = GetMouseWorldPos();
-        //if (InBounds(mPosition))
-        //{
-            //transform.position = GetMouseWorldPos() + mOffset;
-        //}
-        
-    }
-    void OnMouseExit()
-    {
-        //Debug.Log("Mouse exits");    
-    }
-    void OnMouseOver()
-    {
-        //Debug.Log("Mouse over");
-        
-    }
-    void OnMouseUp()
-    {
-        
-    }
-    void OnMouseUpAsButton()
-    {
-        
-    }
-    private Vector3 GetMouseWorldPos()
-    {
-        // pixel coordinates (x,y)
-        Vector3 mousePoint = Input.mousePosition;
-
-        // z coordinate of game object on screen
-        mousePoint.z = mZCoord;
-
-        return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
-    private bool InBounds(Vector3 mousePos)
-    {
-        Rect borders = new Rect(xBound, yBound, width, height);
-        if (borders.Contains(mPosition))
+        if (pos.y > upBound)
         {
-            return true;
-        } else
-        {
-            return false;
+            pos.y = upBound;
         }
+        pos.x += hAxis * moveSpeed * Time.deltaTime;
+        pos.y += vAxis * moveSpeed * Time.deltaTime;
+        transform.position = pos;
+        transform.Rotate(0, 0, -rTilt);
     }
 }
