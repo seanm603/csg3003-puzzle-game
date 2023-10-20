@@ -24,30 +24,44 @@ public class ObjectMovement : MonoBehaviour
     }
     void MoveObject()
     {
-        float hAxis = Input.GetAxis("Horizontal");
-        float vAxis = Input.GetAxis("Vertical");
-        float rTilt = Input.GetAxis("Mouse X");
-        // float lTilt = Input.GetAxis("Mouse Y");
-        Vector3 pos = transform.position;
-        if (pos.x < -xBound)
-        {
-            pos.x = -xBound;
-        }
-        if (pos.x > xBound)
-        {
-            pos.x = xBound;
-        }
-        if (pos.y < lowBound)
-        {
-            pos.y = lowBound;
-        }
-        if (pos.y > upBound)
-        {
-            pos.y = upBound;
-        }
-        pos.x += hAxis * moveSpeed * Time.deltaTime;
-        pos.y += vAxis * moveSpeed * Time.deltaTime;
+        float tilt = Input.GetAxis("Horizontal");
+        // // float vAxis = Input.GetAxis("Vertical");
+        // float hAxis = Input.GetAxis("Mouse X");
+        // float vAxis = Input.GetAxis("Mouse Y");
+        // // float lTilt = Input.GetAxis("Mouse Y");
+        // Vector3 pos = transform.position;
+        // if (pos.x < -xBound)
+        // {
+        //     pos.x = -xBound;
+        // }
+        // if (pos.x > xBound)
+        // {
+        //     pos.x = xBound;
+        // }
+        // if (pos.y < lowBound)
+        // {
+        //     pos.y = lowBound;
+        // }
+        // if (pos.y > upBound)
+        // {
+        //     pos.y = upBound;
+        // }
+
+        // pos.x += hAxis * moveSpeed * Time.deltaTime;
+        // pos.y += vAxis * moveSpeed * Time.deltaTime;
+        // transform.position = pos;
+        Vector3 mousePos2D = Input.mousePosition;
+
+        // instructs how far to push mouse into 3D
+        mousePos2D.z = -Camera.main.transform.position.z;
+
+        // convert point from 2D screen to 3D world
+        Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(mousePos2D);
+
+        Vector3 pos = this.transform.position;
+        pos.x = mousePos3D.x;
+        pos.y = mousePos3D.y;
         transform.position = pos;
-        transform.Rotate(0, 0, -rTilt);
+        transform.Rotate(0, 0, -tilt * moveSpeed * Time.deltaTime);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class BallMovement : MonoBehaviour
 {
     public float speed = 10f;
@@ -18,19 +19,22 @@ public class BallMovement : MonoBehaviour
         rb.useGravity = true;
         rb.isKinematic = false;
         _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Debug.Log("Found: " + _sceneLoadingManager + " and " + _gameManager);
+        Debug.Log("Scene loading manager active scene: " + _sceneLoadingManager.activeScene);
     }
     void Update()
     {
         Vector3 pos = transform.position;
         if (pos.x < leftBound || pos.x > rightBound || pos.y < lowerBound)
         {
-            Destroy(gameObject);
-            SceneManager.LoadScene("GameOverScene", LoadSceneMode.Additive);
+            Debug.Log("Setting game over");
             _gameManager.SetGameOver();
-            _gameManager.Restart();
+            Debug.Log("Setting Game Over Scene");
+            SceneManager.LoadScene("GameOverScene");
         }
     }
-    
+
     void OnCollisionEnter(Collision coll)
     {
         switch (coll.gameObject.tag)
@@ -45,6 +49,7 @@ public class BallMovement : MonoBehaviour
                 break;
             case "Snowman":
                 Debug.Log("Snowman! You win!");
+                _sceneLoadingManager.LoadGame("LevelPassed");
                 break;
             default:
                 break;

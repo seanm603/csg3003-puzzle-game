@@ -32,6 +32,7 @@ public class SceneLoadingManager : MonoBehaviour
     }
     public int LoadGame(int sceneIndex)
     {
+        Debug.Log("Scene Loader: Loading Scene " + sceneIndex);
         SceneManager.LoadSceneAsync(sceneIndex);
         return 1;
     }

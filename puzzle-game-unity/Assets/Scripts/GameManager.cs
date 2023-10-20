@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     void FetchComponents()
     {
         _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
+        //_head = GameObject.Find("Head");
+        //Debug.Log("Found Head: " + _head.name);
 
 
         if (_sceneLoadingManager == null)
@@ -43,19 +45,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Restart()
+    public void Restart(int sceneID)
     {
-        Debug.LogWarning("Restart Logic Not Implemented");
-
-        if (_isGameOver)
-        {
-            int sceneID = _sceneLoadingManager.activeScene;
-            _sceneLoadingManager.LoadGame(sceneID);
-        }
-        else
-        {
-            Debug.Log("You can not restart now...");
-        }
+        Debug.Log("Game Manager: Restarting...");
+        Debug.Log("Loading Scene: " + sceneID);
+        _sceneLoadingManager.LoadGame(sceneID);
     }
     public void GoToScene(string sceneName)
     {
@@ -80,11 +74,13 @@ public class GameManager : MonoBehaviour
     public void SetGameOver()
     {
         _isGameOver = true;
+
     }
     public void QuitGame()
     {
         // Quit Game Logic
-        Debug.LogWarning("QuitGame Not Implemented");
+        Debug.LogWarning("QuitGame Not Fully Implemented. Results may vary.");
+        SceneManager.LoadScene("TitleScene");
 
     }
 }
