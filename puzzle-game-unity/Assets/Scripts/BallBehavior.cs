@@ -11,6 +11,7 @@ public class BallBehavior : MonoBehaviour
     public float upperBound, lowerBound, leftBound, rightBound;
     private SceneLoadingManager _sceneLoadingManager;
     private GameManager _gameManager;
+    private ScoreManager _scoreManager;
     private bool _ending = false;
     private Rigidbody rb;
 
@@ -22,6 +23,7 @@ public class BallBehavior : MonoBehaviour
         rb.isKinematic = false;
         _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         Debug.Log("Scene loading manager active scene: " + _sceneLoadingManager.activeScene);
     }
     void Update()
@@ -48,7 +50,7 @@ public class BallBehavior : MonoBehaviour
         {
             case "JumpPlate":
                 Debug.Log("BH: Hit the jump plate!");
-                _gameManager.AddScore();
+                _scoreManager.UpdateCurrentScore();
                 rb.AddForce(Vector3.up * jumpForce);
                 break;
             case "Ground":
