@@ -11,11 +11,12 @@ public class BallMovement : MonoBehaviour
     public float upperBound, lowerBound, leftBound, rightBound;
     private SceneLoadingManager _sceneLoadingManager;
     private GameManager _gameManager;
+    private Rigidbody rb;
 
     // Update is called once per frame
     void Start()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.isKinematic = false;
         _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
@@ -29,27 +30,42 @@ public class BallMovement : MonoBehaviour
         if (pos.x < leftBound || pos.x > rightBound || pos.y < lowerBound)
         {
             Debug.Log("Setting game over");
+            rb.isKinematic = true;
+            rb.useGravity = false;
             _gameManager.SetGameOver();
-            Debug.Log("Setting Game Over Scene");
-            SceneManager.LoadScene("GameOverScene");
+
         }
     }
 
     void OnCollisionEnter(Collision coll)
     {
+        rb = GetComponent<Rigidbody>();
         switch (coll.gameObject.tag)
         {
             case "JumpPlate":
                 Debug.Log("Hit the jump plate!");
+                _gameManager.AddScore();
                 Rigidbody rb = GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * jumpForce);
                 break;
             case "Ground":
                 Debug.Log("Hit the ground!");
                 break;
+            case "Obstacle":
+                Debug.Log("Hit obstacle. Game Over.");
+                rb = GetComponent<Rigidbody>();
+                rb.isKinematic = true;
+                rb.useGravity = false;
+                _gameManager.SetGameOver();
+                break;
             case "Snowman":
                 Debug.Log("Snowman! You win!");
-                _sceneLoadingManager.LoadGame("LevelPassed");
+                transform.position = new Vector3(40, 20, 8.16f);
+                rb = GetComponent<Rigidbody>();
+                rb.isKinematic = true;
+                rb.useGravity = false;
+                _gameManager.SetWin();
+                _gameManager.SetGameOver();
                 break;
             default:
                 break;

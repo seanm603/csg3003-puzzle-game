@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4573518170196715283}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7938327452955509360}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d32e345f78ce73d4a9eb092a9701eb61, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
   jumpForce: 1000
   upperBound: 56
   lowerBound: 1.619458
-  leftBound: -49.41672
-  rightBound: 49.41672
+  leftBound: -50.6
+  rightBound: 50.6
 --- !u!54 &-4573518170196715283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,5 +150,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0

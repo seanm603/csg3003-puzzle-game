@@ -12,6 +12,8 @@ TagManager:
   - Snowman
   - Hat
   - Head
+  - Obstacle
+  - ScoreCounter
   layers:
   - Default
   - TransparentFX

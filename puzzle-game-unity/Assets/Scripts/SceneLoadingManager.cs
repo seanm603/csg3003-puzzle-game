@@ -6,26 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneLoadingManager : MonoBehaviour
 {
     [HideInInspector] public int activeScene;
-    public GameObject headPrefab, snowmanPrefab, jumpPlatePrefab, groundPrefab;
+
     void Awake()
     {
         ReturnActiveScene();
-        if (groundPrefab != null)
-        {
-            GameObject ground = Instantiate<GameObject>(groundPrefab);
-        }
-        if (headPrefab != null)
-        {
-            GameObject head = Instantiate<GameObject>(headPrefab);
-        }
-        if (jumpPlatePrefab != null)
-        {
-            GameObject jumpPlate = Instantiate<GameObject>(jumpPlatePrefab);
-        }
-        if (snowmanPrefab != null)
-        {
-            GameObject snowman = Instantiate<GameObject>(snowmanPrefab);
-        }
+
     }
     void Start()
     {
