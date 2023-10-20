@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class BallMovement : MonoBehaviour
+public class BallBehavior : MonoBehaviour
 {
     public float speed = 10f;
     public float jumpForce = 1000f;
     public float upperBound, lowerBound, leftBound, rightBound;
     private SceneLoadingManager _sceneLoadingManager;
     private GameManager _gameManager;
+    private bool _ending = false;
     private Rigidbody rb;
 
     // Update is called once per frame
@@ -21,50 +22,53 @@ public class BallMovement : MonoBehaviour
         rb.isKinematic = false;
         _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        Debug.Log("Found: " + _sceneLoadingManager + " and " + _gameManager);
         Debug.Log("Scene loading manager active scene: " + _sceneLoadingManager.activeScene);
     }
     void Update()
     {
         Vector3 pos = transform.position;
-        if (pos.x < leftBound || pos.x > rightBound || pos.y < lowerBound)
+        if ((pos.x < leftBound || pos.x > rightBound || pos.y < lowerBound) && !_ending)
         {
-            Debug.Log("Setting game over");
-            rb.isKinematic = true;
-            rb.useGravity = false;
-            _gameManager.SetGameOver();
-
+            Debug.Log("BH: Out of Bounds. Game Over.");
+            EndGameSequence();
         }
     }
-
+    void EndGameSequence()
+    {
+        _ending = true;
+        Debug.Log("BH: EndGameSequence() called");
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        Debug.Log("BH: calling GM.SetGameOver()");
+        _gameManager.SetGameOver();
+    }
     void OnCollisionEnter(Collision coll)
     {
-        rb = GetComponent<Rigidbody>();
         switch (coll.gameObject.tag)
         {
             case "JumpPlate":
-                Debug.Log("Hit the jump plate!");
+                Debug.Log("BH: Hit the jump plate!");
                 _gameManager.AddScore();
-                Rigidbody rb = GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.up * jumpForce);
                 break;
             case "Ground":
-                Debug.Log("Hit the ground!");
+                Debug.Log("BH: Hit the ground!");
                 break;
             case "Obstacle":
-                Debug.Log("Hit obstacle. Game Over.");
-                rb = GetComponent<Rigidbody>();
+                Debug.Log("BH: Hit obstacle. Game Over.");
                 rb.isKinematic = true;
                 rb.useGravity = false;
+                Debug.Log("BH: calling GM.SetGameOver()");
                 _gameManager.SetGameOver();
                 break;
             case "Snowman":
-                Debug.Log("Snowman! You win!");
+                Debug.Log("BH: Snowman! You win!");
                 transform.position = new Vector3(40, 20, 8.16f);
-                rb = GetComponent<Rigidbody>();
                 rb.isKinematic = true;
                 rb.useGravity = false;
+                Debug.Log("BH: calling GM.SetWin()");
                 _gameManager.SetWin();
+                Debug.Log("BH: Calling GM.SetGameOver()");
                 _gameManager.SetGameOver();
                 break;
             default:

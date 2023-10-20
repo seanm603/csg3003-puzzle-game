@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ObjectMovement : MonoBehaviour
+public class PlateBehavior : MonoBehaviour
 {
     public float xBound, upBound, lowBound, moveSpeed;
     private Vector3 mOffset;
@@ -37,6 +37,6 @@ public class ObjectMovement : MonoBehaviour
         pos.x = mousePos3D.x;
         pos.y = mousePos3D.y;
         transform.position = pos;
-        transform.Rotate(0, 0, -tilt * moveSpeed * Time.deltaTime);
+        transform.Rotate(0, 0, -tilt * moveSpeed * Time.deltaTime * 2);
     }
 }

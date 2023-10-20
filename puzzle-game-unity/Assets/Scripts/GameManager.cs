@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public ScoreCounter scoreCounter;
     [SerializeField] private SceneLoadingManager _sceneLoadingManager;
     [SerializeField] private bool _isReloading;
-    private GameObject _head, _jumpPlate, _snowman, _ground;
+    private GameObject head, jumpPlate, snowman, ground, tree, sleigh;
     [SerializeField] private GameObject gameOverPanel, nextLevelPanel;
     [SerializeField] private Text restartText, continueText;
     [SerializeField] private bool _isGameOver = false;
@@ -23,41 +23,42 @@ public class GameManager : MonoBehaviour
         string level = SceneManager.GetActiveScene().name;
         if (groundPrefab != null)
         {
-            GameObject ground = Instantiate<GameObject>(groundPrefab);
+            ground = Instantiate<GameObject>(groundPrefab);
         }
         if (headPrefab != null)
         {
-            GameObject head = Instantiate<GameObject>(headPrefab);
+            head = Instantiate<GameObject>(headPrefab);
         }
         if (jumpPlatePrefab != null)
         {
-            GameObject jumpPlate = Instantiate<GameObject>(jumpPlatePrefab);
+            jumpPlate = Instantiate<GameObject>(jumpPlatePrefab);
         }
         if (snowmanPrefab != null)
         {
-            GameObject snowman = Instantiate<GameObject>(snowmanPrefab);
+            snowman = Instantiate<GameObject>(snowmanPrefab);
         }
         if (level == "LevelTwo")
         {
             if (treePrefab2 != null)
             {
-                GameObject tree = Instantiate<GameObject>(treePrefab2);
+                tree = Instantiate<GameObject>(treePrefab2);
             }
             if (sleighPrefab2 != null)
             {
-                GameObject sleigh = Instantiate<GameObject>(sleighPrefab2);
+                sleigh = Instantiate<GameObject>(sleighPrefab2);
             }
         }
 
     }
     void Start()
     {
+        Debug.Log("GM: Starting " + SceneManager.GetActiveScene().name);
+        Debug.Log("Current High Score: " + PlayerPrefs.GetInt("LevelOneScore"));
         _isGameOver = false;
         gameOverPanel.SetActive(false);
         restartText.gameObject.SetActive(false);
         nextLevelPanel.SetActive(false);
         continueText.gameObject.SetActive(false);
-        FetchComponents();
     }
 
     void Update()
@@ -65,100 +66,78 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && !_isReloading)
         {
             _isReloading = true;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Restart();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GoToScene("TitleScene");
+            QuitGame();
         }
-    }
-
-    void FetchComponents()
-    {
-        _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
-        _ground = GameObject.Find("Ground");
-        _head = GameObject.Find("Head");
-        _snowman = GameObject.Find("Snowman");
-        _jumpPlate = GameObject.Find("JumpPlate");
-
-
-        //_head = GameObject.Find("Head");
-        //Debug.Log("Found Head: " + _head.name);
-
-
-        if (_sceneLoadingManager == null)
-        {
-            Debug.Log("Can't find SceneLoadingManager");
-        }
-    }
-
-    public void Restart()
-    {
-        Debug.Log("Game Manager: Restart Method called");
-    }
-    public void GoToScene(string sceneName)
-    {
-        _sceneLoadingManager.LoadGame(sceneName);
-    }
-    // public void GoNextLevel()
-    // {
-    //     Debug.Log("Active Scene: " + _sceneLoadingManager.ReturnActiveScene().name);
-    //     switch (_sceneLoadingManager.ReturnActiveScene().name)
-    //     {
-    //         case "LevelOne":
-    //             _sceneLoadingManager.LoadGame("LevelTwo");
-    //             break;
-    //         case "LevelTwo":
-    //             _sceneLoadingManager.LoadGame("Credits");
-    //             break;
-    //         default:
-    //             Debug.Log("Next level not found -- current level -> " + _sceneLoadingManager.ReturnActiveScene().name);
-    //             break;
-    //     }
-    // }
-    public void SetWin()
-    {
-        Debug.Log("Game Manager: setting win");
-        didWin = true;
-    }
-    public void SetGameOver()
-    {
-        Debug.Log("Game Manager: setting game over");
-        _isGameOver = true;
-
         if (_isGameOver)
         {
             if (didWin)
             {
-                SavePrefs();
-                StartCoroutine(WinSequence());
-                Debug.Log("Awaiting input");
-                if (Input.GetKeyDown(KeyCode.R))
+                Debug.Log("GM: Quitting Game - Win Case");
+                Debug.Log("GM: Awaiting input");
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    Debug.Log("GM: Enter pressed");
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    print("Application Quit");
+                    Debug.Log("GM: Q pressed");
+                    QuitGame();
                     Application.Quit();
                 }
             }
             else
             {
-                StartCoroutine(GameOverSequence());
+                Debug.Log("GM: Quitting Game - Game Over Case");
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    Debug.Log("GM: R pressed");
+                    Restart();
                 }
 
                 //If Q is hit, quit the game
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    print("Application Quit");
-                    Application.Quit();
+                    print("GM: Q pressed");
+                    QuitGame();
                 }
             }
 
+        }
+    }
+
+    public void Restart()
+    {
+        Debug.Log("GM: Restart() called");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void GoToScene(string sceneName)
+    {
+        _sceneLoadingManager.LoadGame(sceneName);
+    }
+    public void SetWin()
+    {
+        Debug.Log("GM: setting win");
+        didWin = true;
+    }
+    public void SetGameOver()
+    {
+        Debug.Log("GM: Setting game over");
+        _isGameOver = true;
+        Debug.Log("GM: Saving PlayerPrefs");
+        SavePrefs();
+        Debug.Log("GM: Loading EndScene");
+        if (didWin)
+        {
+            StartCoroutine(WinSequence());
+        }
+        else
+        {
+            StartCoroutine(GameOverSequence());
         }
     }
     private IEnumerator GameOverSequence()
@@ -181,27 +160,33 @@ public class GameManager : MonoBehaviour
 
     public void SavePrefs()
     {
-        Debug.Log("Saving Prefs...");
         string level = SceneManager.GetActiveScene().name;
+        Debug.Log("GM: Saving PlayerPrefs for " + level);
         switch (level)
         {
             case "LevelOne":
-                if (PlayerPrefs.HasKey("LevelOneScore"))
+                string scoreKey = "LevelOneScore";
+                if (PlayerPrefs.HasKey(scoreKey))
                 {
-                    PlayerPrefs.SetInt("LevelOneScore", Mathf.Min(PlayerPrefs.GetInt("LevelOneScore"), _score));
+                    Debug.Log("GM: Prior score found, comparing " + PlayerPrefs.GetInt(scoreKey) + " to " + _score);
+                    PlayerPrefs.SetInt("LevelOneScore", Mathf.Min(PlayerPrefs.GetInt(scoreKey), _score));
                 }
                 else
                 {
+                    Debug.Log("GM: No prior score found, setting new score");
                     PlayerPrefs.SetInt("LevelOneScore", _score);
                 }
                 break;
             case "LevelTwo":
-                if (PlayerPrefs.HasKey("LevelTwoScore"))
+                scoreKey = "LevelTwoScore";
+                if (PlayerPrefs.HasKey(scoreKey))
                 {
-                    PlayerPrefs.SetInt("LevelTwoScore", Mathf.Min(PlayerPrefs.GetInt("LevelTwoScore"), _score));
+                    Debug.Log("GM: Prior score found, comparing " + PlayerPrefs.GetInt(scoreKey) + " to " + _score);
+                    PlayerPrefs.SetInt("LevelTwoScore", Mathf.Min(PlayerPrefs.GetInt(scoreKey), _score));
                 }
                 else
                 {
+                    Debug.Log("GM: No prior score found");
                     PlayerPrefs.SetInt("LevelTwoScore", _score);
                 }
                 break;
@@ -209,9 +194,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Level not found");
                 break;
         }
-        Debug.Log("Current Score: " + _score);
-        Debug.Log("Current Personal Best: " + PlayerPrefs.GetInt("HighScore"));
-        Debug.Log("Updated best is " + PlayerPrefs.GetInt("HighScore"));
     }
     public void AddScore()
     {
@@ -224,10 +206,7 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        // Quit Game Logic
-        Debug.LogWarning("QuitGame Not Fully Implemented. Results may vary.");
+        Debug.Log("GM: QuitGame() called");
         SceneManager.LoadScene("TitleScene");
-
     }
 }
-

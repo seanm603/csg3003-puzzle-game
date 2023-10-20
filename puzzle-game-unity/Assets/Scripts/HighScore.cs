@@ -22,56 +22,54 @@ public class HighScore : MonoBehaviour
             case "LevelOne":
                 if (PlayerPrefs.HasKey("LevelOneScore"))
                 {
-                    SCORE = PlayerPrefs.GetInt("LevelOneScore");
-                    Debug.Log("HighScore: current stored score is " + _gameManager.GetScore());
+                    _SCORE = PlayerPrefs.GetInt("LevelOneScore");
+                    Debug.Log("HS: current stored score is " + _SCORE);
                 }
-                PlayerPrefs.SetInt("LevelOneScore", SCORE);
+                PlayerPrefs.SetInt("LevelOneScore", _SCORE);
                 if (_UI_TEXT != null)
                 {
-                    _UI_TEXT.text = "Personal Best: " + SCORE.ToString("#,0");
+                    _UI_TEXT.text = "Personal Best: " + _SCORE.ToString("#,0");
                 }
                 break;
             case "LevelTwo":
                 if (PlayerPrefs.HasKey("LevelTwoScore"))
                 {
-                    SCORE = PlayerPrefs.GetInt("LevelTwoScore");
-                    Debug.Log("HighScore: current stored score is " + _gameManager.GetScore());
+                    _SCORE = PlayerPrefs.GetInt("LevelTwoScore");
+                    Debug.Log("HighScore: current stored score is " + _SCORE);
                 }
-                PlayerPrefs.SetInt("LevelTwoScore", SCORE);
+                PlayerPrefs.SetInt("LevelTwoScore", _SCORE);
                 if (_UI_TEXT != null)
                 {
-                    _UI_TEXT.text = "Personal Best: " + SCORE.ToString("#,0");
+                    _UI_TEXT.text = "Personal Best: " + _SCORE.ToString("#,0");
                 }
                 break;
         }
 
     }
 
-    static public int SCORE
-    {
-        get { return (_SCORE); }
-        private set
-        {
-            _SCORE = value;
-            PlayerPrefs.SetInt("HighScore", value);
-            if (_UI_TEXT != null)
-            {
-                _UI_TEXT.text = "Personal Best: " + value.ToString("#,0");
-            }
-        }
-    }
-
-    [Tooltip("Check this box to reset the HighScore in PlayerPrefs")]
+    [Tooltip("Checking this box resets best scores fro ALL levels")]
     public bool resetHighScoreNow = false;
 
+    // void OnDrawGizmos()
+    // {
+    //     string level = SceneManager.GetActiveScene().name;
+    //     if (resetScoresNow)
+    //     {
+    //         Debug.Log("HS: Resetting High Score to 100 now");
+    //         resetScoresNow = false;
+    //         PlayerPrefs.SetInt("LevelOneScore", 999);
+    //         PlayerPrefs.SetInt("LevelTwoScore", 999);
+    //     }
+    // }
     void OnDrawGizmos()
     {
+        Debug.Log("Reset!");
         if (resetHighScoreNow)
         {
             resetHighScoreNow = false;
-            PlayerPrefs.SetInt("HighScore", 100);
-            Debug.LogWarning("PlayerPrefs HighScore reset to 100.");
+            PlayerPrefs.SetInt("LevelOneScore", 1000);
+            PlayerPrefs.SetInt("LevelTwoScore", 1000);
+            Debug.LogWarning("PlayerPrefs HighScore reset to 1,000.");
         }
     }
-
 }
