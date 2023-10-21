@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         string level = SceneManager.GetActiveScene().name;
+        Debug.Log("GM: Waking " + level);
         if (groundPrefab != null)
         {
             ground = Instantiate<GameObject>(groundPrefab);
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // Enables in-game reload and quit mechanism
         if (Input.GetKeyDown(KeyCode.R) && !_isReloading)
         {
             _isReloading = true;
@@ -95,33 +97,25 @@ public class GameManager : MonoBehaviour
         {
             if (didWin)
             {
-                Debug.Log("GM: Quitting Game - Win Case");
-                Debug.Log("GM: Awaiting input");
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("GM: Enter pressed");
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    Debug.Log("GM: Q pressed");
                     QuitGame();
-                    Application.Quit();
                 }
             }
             else
             {
-                Debug.Log("GM: Quitting Game - Game Over Case");
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Debug.Log("GM: R pressed");
                     Restart();
                 }
 
                 //If Q is hit, quit the game
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    print("GM: Q pressed");
                     QuitGame();
                 }
             }
@@ -131,7 +125,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("GM: Restart() called");
+        Debug.Log("GM: Restarting");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void GoToScene(string sceneName)

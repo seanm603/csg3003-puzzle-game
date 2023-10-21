@@ -37,6 +37,6 @@ public class PlateBehavior : MonoBehaviour
         pos.x = mousePos3D.x;
         pos.y = mousePos3D.y;
         transform.position = pos;
-        transform.Rotate(0, 0, -tilt * moveSpeed * Time.deltaTime * 2);
+        transform.Rotate(0, 0, -tilt * moveSpeed * Time.deltaTime * 5);
     }
 }

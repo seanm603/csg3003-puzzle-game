@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name.Equals("LevelOne"))
         {
             Debug.Log("GM: Updating scoring UI for LevelOne");
-            bestScoreText.text = bestScoreL1.ToString("#,0");
+            bestScoreText.text = "PR: " + bestScoreL1.ToString("#,0");
             currentScoreText.text = GetCurrentScore().ToString("#,0");
         }
         else if (SceneManager.GetActiveScene().name.Equals("LevelTwo"))

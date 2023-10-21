@@ -20,7 +20,7 @@ GameObject:
   m_TagString: JumpPlate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &4626466419514040234
 Transform:
@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 8283130174189751240}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.9, y: 48.7, z: 8.16}
-  m_LocalScale: {x: 7.54, y: 0.97, z: 6.5}
+  m_LocalPosition: {x: -46.9, y: 20, z: 8.16}
+  m_LocalScale: {x: 6, y: 0.97, z: 6.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 649049057bfe64bbe9680fa7d7062444, type: 2}
+  - {fileID: 2100000, guid: d2aa8197b527a47b7ada4e0a2baed48d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,7 +132,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!122 &-5513684572367847135
@@ -142,11 +142,11 @@ Halo:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8283130174189751240}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4291294717
-  m_Size: 3
+    rgba: 1959853311
+  m_Size: 3.5
 --- !u!114 &4167053877989734123
 MonoBehaviour:
   m_ObjectHideFlags: 0
