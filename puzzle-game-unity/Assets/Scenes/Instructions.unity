@@ -738,7 +738,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Frosty's Hat will follow your mouse\n\nFrosty is a measily ordinary snowman
     without his hat. \nUse your magical powers to return his hat.\nYour powers can
-    be angles using A and D.\n\nYour score reflects the number of interactions you
+    be angled using A and D.\n\nYour score reflects the number of interactions you
     have with the hat.\nTry and interact as few times as possible."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
