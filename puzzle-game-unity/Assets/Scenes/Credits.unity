@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,9 +152,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2441651a4fff749ba6f5136bb41f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headPrefab: {fileID: 0}
+  snowmanPrefab: {fileID: 0}
+  jumpPlatePrefab: {fileID: 0}
+  groundPrefab: {fileID: 0}
+  treePrefab2: {fileID: 0}
+  sleighPrefab2: {fileID: 0}
   _sceneLoadingManager: {fileID: 1757004247}
-  _isGameOver: 0
+  _scoreManager: {fileID: 0}
   _isReloading: 0
+  gameOverPanel: {fileID: 0}
+  nextLevelPanel: {fileID: 0}
+  restartText: {fileID: 0}
+  continueText: {fileID: 0}
+  _isGameOver: 0
+  didWin: 0
 --- !u!4 &281559424
 Transform:
   m_ObjectHideFlags: 0
@@ -807,8 +819,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeScene: 0
-  ballPrefab: {fileID: 0}
-  cupPrefab: {fileID: 0}
 --- !u!4 &1757004248
 Transform:
   m_ObjectHideFlags: 0
@@ -928,7 +938,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0.3301887, b: 0.32391495, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

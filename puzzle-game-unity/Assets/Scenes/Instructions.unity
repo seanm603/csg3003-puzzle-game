@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -694,7 +694,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000015259, y: -344.04}
-  m_SizeDelta: {x: 1124.4064, y: 300.9976}
+  m_SizeDelta: {x: 1565.9, y: 300.9976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413669665
 MonoBehaviour:
@@ -716,15 +716,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move the ball along the x-axis with A and D keys
-
-
-    Your goal is to
-    get the ball into the cup (red tube)
-
-
-    Some objects may be moved to help
-    you'
+  m_text: "Frosty's Hat will follow your mouse\n\nFrosty is a measily ordinary snowman
+    without his hat. \nUse your magical powers to return his hat.\nYour powers can
+    be angles using A and D.\n\nYour score reflects the number of interactions you
+    have with the hat.\nTry and interact as few times as possible."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -831,8 +826,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeScene: 0
-  ballPrefab: {fileID: 0}
-  cupPrefab: {fileID: 0}
 --- !u!4 &1607160642
 Transform:
   m_ObjectHideFlags: 0
@@ -877,9 +870,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2441651a4fff749ba6f5136bb41f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headPrefab: {fileID: 0}
+  snowmanPrefab: {fileID: 0}
+  jumpPlatePrefab: {fileID: 0}
+  groundPrefab: {fileID: 0}
+  treePrefab2: {fileID: 0}
+  sleighPrefab2: {fileID: 0}
   _sceneLoadingManager: {fileID: 1607160641}
-  _isGameOver: 0
+  _scoreManager: {fileID: 0}
   _isReloading: 0
+  gameOverPanel: {fileID: 0}
+  nextLevelPanel: {fileID: 0}
+  restartText: {fileID: 0}
+  continueText: {fileID: 0}
+  _isGameOver: 0
+  didWin: 0
 --- !u!4 &1717473740
 Transform:
   m_ObjectHideFlags: 0

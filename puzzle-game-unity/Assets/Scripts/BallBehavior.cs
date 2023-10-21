@@ -65,7 +65,8 @@ public class BallBehavior : MonoBehaviour
                 break;
             case "Snowman":
                 Debug.Log("BH: Snowman! You win!");
-                transform.position = new Vector3(40, 20, 8.16f);
+                transform.position = new Vector3(40, 20.8f, 8.16f);
+                transform.eulerAngles = Vector3.zero;
                 rb.isKinematic = true;
                 rb.useGravity = false;
                 Debug.Log("BH: calling GM.SetWin()");

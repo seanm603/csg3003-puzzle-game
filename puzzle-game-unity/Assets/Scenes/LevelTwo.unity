@@ -1233,7 +1233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2441651a4fff749ba6f5136bb41f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headPrefab: {fileID: 7938327452955509360, guid: 5a659d01bf5e34485987fdb8c3ab86cb, type: 3}
+  headPrefab: {fileID: 1180758119482076498, guid: a204f053864cf4960afe85f153ee338f, type: 3}
   snowmanPrefab: {fileID: 8262666043189349476, guid: 539482114c7fe40049a7520ba244c146, type: 3}
   jumpPlatePrefab: {fileID: 8283130174189751240, guid: e30cd1db43450407fb4e9e1b875365e3, type: 3}
   groundPrefab: {fileID: 374691074213713853, guid: e6d27989ddad54d5096be3bc8eb1be77, type: 3}

@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("GM: Quitting Game - Win Case");
                 Debug.Log("GM: Awaiting input");
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     Debug.Log("GM: Enter pressed");
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -147,11 +147,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GM: Setting game over");
         _isGameOver = true;
-        Debug.Log("GM: Calling SM.TryUpdateBestScore()");
-        _scoreManager.TryUpdateBestScore();
         Debug.Log("GM: Loading EndScene");
         if (didWin)
         {
+            Debug.Log("GM: Calling SM.TryUpdateBestScore()");
+            _scoreManager.TryUpdateBestScore();
             StartCoroutine(WinSequence());
         }
         else
