@@ -46,21 +46,18 @@ public class BallBehavior : MonoBehaviour
         switch (coll.gameObject.tag)
         {
             case "JumpPlate":
-                Debug.Log("BH: Hit the jump plate!");
                 _scoreManager.UpdateCurrentScore();
                 rb.AddForce(Vector3.up * jumpForce);
                 break;
             case "Ground":
                 break;
             case "Obstacle":
-                Debug.Log("BH: Hit obstacle. Game Over.");
                 rb.isKinematic = true;
                 rb.useGravity = false;
                 Debug.Log("BH: calling GM.SetGameOver()");
                 _gameManager.SetGameOver();
                 break;
             case "Snowman":
-                Debug.Log("BH: Snowman! You win!");
                 transform.position = new Vector3(40, 20.8f, 8.16f);
                 transform.eulerAngles = Vector3.zero;
                 rb.isKinematic = true;

@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &421308
 Transform:
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 146810}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 25, y: 0, z: 8}
-  m_LocalScale: {x: 1130, y: 1130, z: 1130}
+  m_LocalPosition: {x: 24, y: 1, z: 8.16}
+  m_LocalScale: {x: 1200, y: 1200, z: 1200}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,8 +65,8 @@ MeshRenderer:
   - {fileID: 2100000, guid: 6d9cd3b2aa6165846b4beaa0c268bb02, type: 2}
   - {fileID: 2100000, guid: 843d0c0a3ed1b804da1a385dbed35f0a, type: 2}
   - {fileID: 2100000, guid: 8f071b4979caafe44ae44d05871bdb17, type: 2}
-  - {fileID: 2100000, guid: e1798c5eac029654eb5a24208e465ac9, type: 2}
   - {fileID: 2100000, guid: e334806a40f1b284abe2f70986891735, type: 2}
+  - {fileID: 2100000, guid: e1798c5eac029654eb5a24208e465ac9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

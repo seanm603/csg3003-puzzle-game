@@ -45,12 +45,15 @@ public class GameManager : MonoBehaviour
         }
         if (sceneName == "LevelTwo")
         {
+            Debug.Log("GM: LevelTwo Detected");
             if (treePrefab2 != null)
             {
+                Debug.Log("Loading Tree");
                 tree = Instantiate<GameObject>(treePrefab2);
             }
             if (sleighPrefab2 != null)
             {
+                Debug.Log("Loading Sleigh");
                 sleigh = Instantiate<GameObject>(sleighPrefab2);
             }
         }
@@ -102,7 +105,8 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.Log("GM: Active Scene - " + sceneName);
                     Debug.Log("GM: Loading Scene " + (SceneManager.GetActiveScene().buildIndex + 1));
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene("LevelTwo");
                 }
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
