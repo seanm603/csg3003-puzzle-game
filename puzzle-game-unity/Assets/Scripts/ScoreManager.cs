@@ -12,9 +12,11 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private int bestScoreL2 = 999;
     [SerializeField] private Text bestScoreText;
     [SerializeField] private Text currentScoreText;
+    private string sceneName;
 
     void Start()
     {
+        sceneName = SceneManager.GetActiveScene().name;
         bestScoreL1 = PlayerPrefs.GetInt("BestScoreL1", 999);
         bestScoreL2 = PlayerPrefs.GetInt("BestScoreL2", 999);
     }
@@ -27,16 +29,13 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScoringUI()
     {
-        Debug.Log("GM: Updating scoring UI");
-        if (SceneManager.GetActiveScene().name.Equals("LevelOne"))
+        if (sceneName.Equals("LevelOne"))
         {
-            Debug.Log("GM: Updating scoring UI for LevelOne");
             bestScoreText.text = "PR: " + bestScoreL1.ToString("#,0");
             currentScoreText.text = GetCurrentScore().ToString("#,0");
         }
-        else if (SceneManager.GetActiveScene().name.Equals("LevelTwo"))
+        else if (sceneName.Equals("LevelTwo"))
         {
-            Debug.Log("GM: Updating scoring UI for LevelTwo");
             bestScoreText.text = bestScoreL2.ToString("#,0");
             currentScoreText.text = _score.ToString("#,0");
         }
@@ -63,7 +62,6 @@ public class ScoreManager : MonoBehaviour
     }
     public void UpdateCurrentScore()
     {
-        Debug.Log("SM: Updating current score");
         _score++;
     }
     public void TryUpdateBestScore()
@@ -72,7 +70,6 @@ public class ScoreManager : MonoBehaviour
         {
             if (_score < bestScoreL1)
             {
-                Debug.Log("SM: evaluating " + _score + " < " + bestScoreL1 + " for LevelOne");
                 PlayerPrefs.SetInt("BestScoreL1", _score);
                 bestScoreL1 = _score;
             }
@@ -81,7 +78,6 @@ public class ScoreManager : MonoBehaviour
         {
             if (_score < bestScoreL2)
             {
-                Debug.Log("SM: evaluating " + _score + " < " + bestScoreL2 + " for LevelTwo");
                 PlayerPrefs.SetInt("BestScoreL2", _score);
                 bestScoreL2 = _score;
             }
@@ -89,7 +85,6 @@ public class ScoreManager : MonoBehaviour
     }
     public int GetCurrentScore()
     {
-        Debug.Log("SM: Returning score");
         return _score;
     }
     public int GetBestScore(string level)

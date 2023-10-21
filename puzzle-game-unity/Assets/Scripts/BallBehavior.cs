@@ -9,7 +9,6 @@ public class BallBehavior : MonoBehaviour
     public float speed = 10f;
     public float jumpForce = 1000f;
     public float upperBound, lowerBound, leftBound, rightBound;
-    private SceneLoadingManager _sceneLoadingManager;
     private GameManager _gameManager;
     private ScoreManager _scoreManager;
     private bool _ending = false;
@@ -21,10 +20,8 @@ public class BallBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.isKinematic = false;
-        _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        Debug.Log("Scene loading manager active scene: " + _sceneLoadingManager.activeScene);
     }
     void Update()
     {
@@ -54,7 +51,6 @@ public class BallBehavior : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpForce);
                 break;
             case "Ground":
-                Debug.Log("BH: Hit the ground!");
                 break;
             case "Obstacle":
                 Debug.Log("BH: Hit obstacle. Game Over.");
@@ -69,9 +65,7 @@ public class BallBehavior : MonoBehaviour
                 transform.eulerAngles = Vector3.zero;
                 rb.isKinematic = true;
                 rb.useGravity = false;
-                Debug.Log("BH: calling GM.SetWin()");
                 _gameManager.SetWin();
-                Debug.Log("BH: Calling GM.SetGameOver()");
                 _gameManager.SetGameOver();
                 break;
             default:

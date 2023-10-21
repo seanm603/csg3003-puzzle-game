@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject headPrefab, snowmanPrefab, jumpPlatePrefab, groundPrefab, treePrefab2, sleighPrefab2;
-    [SerializeField] private SceneLoadingManager _sceneLoadingManager;
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private bool _isReloading;
     private GameObject head, jumpPlate, snowman, ground, tree, sleigh;
@@ -16,11 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text restartText, continueText;
     [SerializeField] private bool _isGameOver = false;
     [SerializeField] private bool didWin = false;
+    private string sceneName;
     // Start is called before the first frame update
     void Awake()
     {
-        string level = SceneManager.GetActiveScene().name;
-        Debug.Log("GM: Waking " + level);
+        sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("GM: Waking " + sceneName);
+
+        // Instantiate GameObjects for Scene
         if (groundPrefab != null)
         {
             ground = Instantiate<GameObject>(groundPrefab);
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("GM: Scene doesn't require scoring or something went wrong");
         }
-        if (level == "LevelTwo")
+        if (sceneName == "LevelTwo")
         {
             if (treePrefab2 != null)
             {
@@ -55,8 +57,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("GM: Starting " + SceneManager.GetActiveScene().name);
-        string sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("GM: Starting " + sceneName);
         if (_scoreManager != null)
         {
             _scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
@@ -99,6 +100,8 @@ public class GameManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    Debug.Log("GM: Active Scene - " + sceneName);
+                    Debug.Log("GM: Loading Scene " + (SceneManager.GetActiveScene().buildIndex + 1));
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
                 if (Input.GetKeyDown(KeyCode.Q))
@@ -125,23 +128,18 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("GM: Restarting");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void GoToScene(string sceneName)
-    {
-        _sceneLoadingManager.LoadGame(sceneName);
+        Debug.Log("GM: Restarting " + sceneName);
+        SceneManager.LoadScene(sceneName);
     }
     public void SetWin()
     {
-        Debug.Log("GM: setting win");
+        Debug.Log("GM: SetWin() called");
         didWin = true;
     }
     public void SetGameOver()
     {
-        Debug.Log("GM: Setting game over");
+        Debug.Log("GM: SetGameOver() called");
         _isGameOver = true;
-        Debug.Log("GM: Loading EndScene");
         if (didWin)
         {
             Debug.Log("GM: Calling SM.TryUpdateBestScore()");
@@ -157,18 +155,24 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
 
         restartText.gameObject.SetActive(true);
     }
     private IEnumerator WinSequence()
     {
-        Debug.Log("Starting WinSequence Coroutine");
         nextLevelPanel.SetActive(true);
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
 
         continueText.gameObject.SetActive(true);
+    }
+
+    public void GoToScene(string sceneName)
+    {
+        // Used to implement buttons in the game
+        // Each button uses this method on click
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()

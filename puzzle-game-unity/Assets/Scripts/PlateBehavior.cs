@@ -10,12 +10,10 @@ public class PlateBehavior : MonoBehaviour
     private Vector3 mOffset;
     private Vector3 mPosition;
     private float mZCoord;
-    private SceneLoadingManager _sceneLoadingManager;
     private GameManager _gameManager;
 
     void Start()
     {
-        _sceneLoadingManager = GameObject.Find("SceneLoadingManager").GetComponent<SceneLoadingManager>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     void Update()
