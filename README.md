@@ -9,6 +9,7 @@
 # Game Overview
 
 **Title:** Frosty’s Hat
+
 **Platform:** PC Game
 
 **Genre:** Puzzle Platformer
